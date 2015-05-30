@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="span0 well text-center">
+    <% if logged_in? %>
+      <%= link_to vote_post_path(post, vote: true), method: :post do %>
+        <i class="icon-arrow-up"></i>
+      <% end %>
+    <% end %>
+    <br/>
+    <%= post.total_votes %> votes
+    <br/>
+    <% if logged_in? %>
+      <%= link_to vote_post_path(post, vote: false), method: :post do %>
+        <i class="icon-arrow-down"></i>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="span8 well">
+    <%= render post.categories %>
+    <h4><%= link_to post.title, fix_url(post.url) %></h4>
+    <p><%= post.description %></p>
+    <p>
+      <span class="quiet">Posted by <%= link_to post.user.username, user_path(post.user) %></span>
+      <small>at <%= display_date(post.created_at) %> (<%= link_to 'edit', edit_post_path(post) %>)</small>
+    </p>
+    <small>
+      <span><%= link_to "#{post.comments.size} comments", post_path(post) %></span>
+    </small>
+  </div>
+</div>

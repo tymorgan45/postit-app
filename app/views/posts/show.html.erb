@@ -1,0 +1,33 @@
+<p class="pull-right">
+  [<%= link_to 'Edit this post', edit_post_path(@post) %>]
+</p>
+
+<p>
+  <%= render @post.categories %>
+</p>
+
+<%= render 'shared/content_title', title: @post.title %>
+
+<p>
+  <%= @post.description %>
+</p>
+
+<p>
+<%= render 'shared/errors', obj: @comment %>
+</p>
+
+<div class="row">
+  <div class="span8">
+    <%= form_for [@post, @comment] do |f| %>
+      <div class="control-group">
+        <%= f.label :body, "Leave A Comment" %>
+        <%= f.text_area :body, rows: 3, class: "span4" %>
+      </div>
+      <%= f.submit 'Create comment', class: "btn btn-primary"%>
+    <% end %>
+  </div>
+</div>
+
+<% @post.comments.reverse.each do |comment| %>
+  <%= render 'comments/comments', comment: comment, show_post: false %>
+<% end %>
