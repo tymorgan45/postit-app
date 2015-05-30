@@ -1,5 +1,3 @@
-require 'pry'
-
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :post, :vote]
   before_action :require_user, except: [:index, :show]
